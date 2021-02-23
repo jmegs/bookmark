@@ -1,6 +1,6 @@
 # Bookmark
 
-> _this project is following [README Driven Development][rdd], where the app's features are written out before anything is implemented_
+> _this project is following [README Driven Development][rdd], where the app's features are written out before anything is implemented. Sometimes *way* before..._ 
 
 The goal of bookmark is to be a single bucket where we save things encountered on the internet that we'd like to **remember**. It is not intended to be a 'read later' service like [Pocket][pocket] – articles read in a Pocket type service that we want to **remember** would in turn be saved into bookmark.
 
