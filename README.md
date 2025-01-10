@@ -22,20 +22,19 @@ The core element of bookmark is the `Item`. This is a single piece of informatio
 
 Each `Item` is assigned a `Type` when it is captured. The `Type` describes **what kind of thing the item is**. Types are inferred based on a set of rules that take into account domain name, MIME type, document metadata, etc.
 
-| Type       | Description                                                       |
-| ---------- | ----------------------------------------------------------------- |
-| Image      | A bitmap or vector image that's saved directly to bookmark        |
-| GIF        | A gif saved directly to bookmark                                  |
-| Video      | A link from known video hosts like YouTube, or a direct video url |
-| Screenshot | Special type, website screenshots captured by bookmark extension  |
-| Article    | The default type for a generic webpage                            |
-| Quote      | Plain text directly saved into bookmark                           |
-| Code       | Any URL from a known source code host like Github                 |
-| Recipe     | Any URL from a known source of recipes, like bonappetit.com       |
-| Book       | A URL from a book listing on amazon.com                           |
-| Place      | A url from a known location service, like google maps or yelp.    |
-| Song       | A URL from a known music provider, like Spotify.                  |
-| Product    | a URL that appears to be a product for sale.                      |
+| Type       | Description                                                          |
+| ---------- | ---------------------------------------------------------------------|
+| Image      | An image or gif that's saved directly to bookmark                    |
+| Video      | A link from known video hosts like YouTube, or a direct video upload |
+| Screenshot | Special type, website screenshots captured by bookmark extension     |
+| Article    | The default type for a generic webpage                               |
+| Quote      | Plain text directly saved into bookmark                              |
+| Repo       | Any URL from a known source code host like Github                    |
+| Book       | A URL from a book listing on amazon.com                              |
+| Place      | A url from a known location service, like google maps or yelp.       |
+| Song       | A URL from a known music provider, like Spotify.                     |
+| Product    | a URL that appears to be a product for sale.                         |
+| Tweet      | a URL from x.com or bsky.app                                         |
 
 ### Collection
 
@@ -43,13 +42,25 @@ Users of bookmark can create up to a limit TBD of `Collections`, that hold items
 
 This borrows from Tiago Forte's [PARA method][para], specifically the concepts of Resource — "a topic or theme of ongoing interest" — and Archive — items that "have become inactive", "you are no longer committed to maintaining", or "are no longer iterested in".
 
+Here are some example collections my bookmarks elsewhere:
+
+| Collection      | Description                                                                          |
+| --------------- | ------------------------------------------------------------------------------------ |
+| Edgerunner      | Imagery and inspiration with a cyberpunk, hard tech, science fiction vibe            |
+| Elsewhere       | Imagery and inspiration around travel, wilderness, and evocative places              |
+| Lifestyle       | Content around clothing, style, entertaining, interior design, general conviviality  |
+| Memetic         | Memes, image macros, internet humor                                                  |
+| Software Design | Design inspiration images and writing on software design and developement            |
+| Training        | Content around health, wellness, spirituality, and self-improvement                  |
+| Vibe Shift      | Content around the social, technological, and political change in the mid-late 2020s |
+
 In addition to user-defined collections, there are several "system" collections:
 
 | Collection    | Description                                  |
 | ------------- | -------------------------------------------- |
 | Everything    | All items, regardless of type                |
 | Uncategorized | All items that do not belong to a collection |
-| Visuals       | Image OR GIF OR Video OR Screenshot          |
+| Visuals       | Type of Image OR GIF OR Video OR Screenshot  |
 | Words         | Article OR Quote                             |
 
 ### Query
@@ -68,7 +79,8 @@ We browse saved `Item`s by constructing a `Query` of the format `Show me <TYPE> 
 	- on capture, if the user has collections defined, they can assign the item to a collection
 
 2. bookmark parses the item and assigns it a `type`
-	- the parser will contain hard coded rulesets that flag certain urls or content types, for example, anything from a list of known recipe domains will be assigned type of recipe.
+	- the parser will contain rulesets that flag certain urls or content types, for example, anything from a list of known video domains will be assigned type of video.
+	- a stretch goal would be to use an AI background job to do the categorization and extract data
 
 3. the item is saved as a document in the database. each `type` has it's own needed fields. If the user assigned it to a collection on capture, it is also associated with that collection
 
